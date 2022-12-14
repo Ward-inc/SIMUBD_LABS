@@ -7,8 +7,8 @@ alter user 'noon-root'@'localhost' identified by '2222';
 //даем все привилегии
 grant all privileges on * . * to 'noon-root'@'localhost';
 
-//даем  привилегии делать select для таблицы турагенство.clients
-grant select on турагенство.clients to 'noon-root'@'localhost';
+//даем  привилегии делать select для таблицы univercity.student
+grant select on  univercity.student to 'noon-root'@'localhost';
 
 //удаляем пользователя
 drop user 'noon-root'@'localhost';
