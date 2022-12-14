@@ -1,0 +1,60 @@
+//Процедуры
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_procedure`(current_country varchar(20))
+BEGIN
+DELETE FROM hotels
+WHERE country = current_country;
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_procedure`(name varchar(20), address varchar(20),
+city varchar(20), country varchar(20), phone varchar(20), description_of_territory varchar(20), number_of_rooms int, swimming_pool boolean, medical_services boolean, spa boolean, stars int, distance_to_the_sea  int)
+BEGIN
+INSERT hotels(name, address, city, country,phone,description_of_territory, number_of_rooms, swimming_pool, medical_services, spa, stars, distance_to_the_sea) 
+VALUES 
+( name, address, city, country, phone, description_of_territory, number_of_rooms, swimming_pool, medical_services, spa, stars, distance_to_the_sea);
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `out_procedure`(current_name varchar(20), out city varchar(20), out country varchar(20))
+BEGIN
+select hotels.city, hotels.country
+from турагенство.hotels
+where hotels.name = current_name;
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `select2_procedure`()
+BEGIN
+SELECT name, address, 
+CASE
+    WHEN country = 'USA'
+        THEN 'Омерика'
+    WHEN number_of_rooms > 50 
+        THEN 'Большой отель'
+    WHEN stars = 5
+        THEN 'Крутой отель'
+    ELSE 'Отель так себе'
+END AS Category
+FROM hotels;
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `select_procedure`()
+BEGIN
+SELECT * FROM турагенство.hotels
+WHERE stars > 3;
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_procedure`(price_night int)
+BEGIN
+UPDATE tours
+SET price_night = price_night;
+END
+//Функция
+CREATE DEFINER=`root`@`localhost` FUNCTION `select_function`(return_date date) RETURNS varchar(3) CHARSET utf8mb3
+    DETERMINISTIC
+BEGIN
+DECLARE sf_value varchar(3);
+        IF curdate() > return_date
+            THEN SET sf_value = 'Yes';
+        ELSEIF  curdate() <= return_date
+            THEN SET sf_value = 'No';
+        END IF;
+     RETURN sf_value;
+END
