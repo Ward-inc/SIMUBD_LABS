@@ -1,0 +1,14 @@
+//создаем пользователя 
+create user 'noon-root'@'localhost' identified by '1111';
+
+//меняем пароль пользователя 
+alter user 'noon-root'@'localhost' identified by '2222';
+
+//даем все привилегии
+grant all privileges on * . * to 'noon-root'@'localhost';
+
+//даем  привилегии делать select для таблицы турагенство.clients
+grant select on турагенство.clients to 'noon-root'@'localhost';
+
+//удаляем пользователя
+drop user 'noon-root'@'localhost';
